@@ -29,4 +29,20 @@ class Stock extends React.Component {
           return response.json();
         }
       )
+    .then(
+        function(data) {
+          console.log(data);
+
+          for (var key in data['Time Series (Daily)']) {
+            stockChartXValuesFunction.push(key);
+            stockChartYValuesFunction.push(data['Time Series (Daily)'][key]['1. open']);
+          }
+
+          // console.log(stockChartXValuesFunction);
+          pointerToThis.setState({
+            stockChartXValues: stockChartXValuesFunction,
+            stockChartYValues: stockChartYValuesFunction
+          });
+        }
+      )
      
